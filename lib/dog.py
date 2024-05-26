@@ -1,39 +1,47 @@
-APPROVED_BREEDS = [
-    "Mastiff",
-    "Chihuahua",
-    "Corgi",
-    "Shar Pei",
-    "Beagle",
-    "French Bulldog",
-    "Pug",
-    "Pointer"
+APPROVED_JOBS = [
+    "Admin",
+    "Customer Service",
+    "Human Resources",
+    "ITC",
+    "Production",
+    "Legal",
+    "Finance",
+    "Sales",
+    "General Management",
+    "Research & Development",
+    "Marketing",
+    "Purchasing"
 ]
 
-
-class Dog:
-    def __init__(self, name='Fido', breed='Mastiff'):
+class Person:
+    def __init__(self, name="", job=""):
         self.name = name
-        self.breed = breed
+        self.job = job
 
-    def get_name(self):
+    @property
+    def name(self):
+        """The name property"""
         return self._name
 
-    def set_name(self, name):
+    @name.setter
+    def name(self, name):
+        """Name must be a string between 1 and 25 characters in length"""
         if isinstance(name, str) and 1 <= len(name) <= 25:
             self._name = name.title()
         else:
             raise ValueError(
-                "Name must be string between 1 and 25 characters.")
+                "Name must be string between 1 and 25 characters."
+            )
 
-    name = property(get_name, set_name)
+    @property
+    def job(self):
+        """The job property"""
+        return self._job
 
-    def get_breed(self):
-        return self._breed
-
-    def set_breed(self, breed):
-        if breed in APPROVED_BREEDS:
-            self._breed = breed
+    @job.setter
+    def job(self, job):
+        """Job must be in the list of approved jobs"""
+        if job in APPROVED_JOBS:
+            self._job = job
         else:
-            raise ValueError("Breed must be in list of approved breeds.")
-
-    breed = property(get_breed, set_breed)
+            raise ValueError("Job must be in list of approved jobs.")
